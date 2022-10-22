@@ -18,17 +18,25 @@ card
     border: 1px solid #99CEA8;
     border-radius: 5px;
     cursor: pointer;
-    display: flex;
     width: 117px;
     height: 146px;
-    align-items: center;
-    justify-content: center;
     margin-top: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 34px;
 }
 
-.back
+.back img
 {
-    background-image: url("assets/back.png");
+    width: 100px;
+    height: 100px;
+}
+
+.front img
+{
+    width: 100px;
+    height: 100px;
 }
 
 p
@@ -41,6 +49,15 @@ p
     text-align: center;
 
     color: #75B79E;
+}
+
+section
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
 }
 
 header
