@@ -1,4 +1,4 @@
-const BackCards = [
+const FrontCards = [
     "bobrossparrot.gif",
     "explodyparrot.gif",
     "fiestaparrot.gif",
@@ -25,17 +25,30 @@ function start() {
     let input = document.querySelector("#value");
     let value = input.value;
 
-    for (let i = 0; i < value; i++) {
-        section.innerHTML += `
+    if (value % 2 == 0) {
+
+        for (let i = 0; i < value; i++) {
+            section.innerHTML += `
         <card onclick="TurnCard(this)">
             <div class="back">
                 <img src="assets/back.png" class="back-card">
             </div>
             <div class="front none">
-                <img src="assets/${BackCards[i]}" class="front-card" />
+                <img src="assets/${FrontCards[i]}" class="front-card" />
             </div>
         </card>`;
+        }
+    } else {
+        alert("Digite um número par");
+        document.location.reload(true);
     }
+}
+
+function shurffle() {
+    cards.forEach(card => {
+        let ramdomPos = Math.floor(Math.random() * 12);
+        card.style.order = ramdomPos;
+    });
 }
 
 function TurnCard(card) {
