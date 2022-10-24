@@ -9,7 +9,9 @@ const FrontCards = [
 ];
 
 let flipped = 0;
-let first, second;
+let back, none, value, attempts = 0;
+let flippedCards = [];
+
 
 document.addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
@@ -26,7 +28,7 @@ function start() {
     aux.classList.remove('begin');
 
     let input = document.querySelector("#value");
-    let value = input.value;
+    value = input.value;
     var cards = [];
 
     if (value % 2 == 0) {
@@ -43,7 +45,7 @@ function start() {
 
         for (let i = 0; i < value; i++) {
             section.innerHTML += `
-        <card onclick="TurnCard(this)" id="${cards[i]}">
+        <card onclick="TurnCard(this)">
             <div class="back">
                 <img src="assets/back.png" class="back-card">
             </div>
@@ -67,59 +69,67 @@ function shurffle(cards) {
 }
 
 function TurnCard(card) {
-    let back = card.querySelector('.back');
-    let none = card.querySelector('.none');
-    let First = '', Second = '' ;
+    back = card.querySelector('.back');
+    none = card.querySelector('.none');
 
-    if (flipped === 0)//se nenhuma carta estiver virada
+    if (flipped == 0)//se nenhuma carta estiver virada
     {
         card.classList.toggle("turn");
         none.classList.remove('none');
         back.classList.add('none');
         flipped = 1;
-        card.classList.add('first');
-        First = card;
+        flippedCards.push(card);
     }
     else {
         card.classList.toggle("turn");
         none.classList.remove('none');
         back.classList.add('none');
-        card.classList.add('second');
-        Second = card;
+        flippedCards.push(card);
 
-        if (First.innerHTML == Second.innerHTML) //se a imagem da primeira e a imagem da segunda forem iguais
-        {
-            win(First, Second);
-        }
-        else {
-            lose(First, Second);
-        }
+
+        setTimeout(compair, 1500);
+
     }
 }
 
-function win(first, second) {
-    alert("You win");
-    let front = first.querySelector('.front');
-    let none = second.querySelector('.none');
+function compair() {
+
+    if (flippedCards[0].innerHTML === flippedCards[1].innerHTML) //se a imagem da primeira e a imagem da segunda forem iguais
+    {
+        win();
+        if (attempts == value) {
+            alert("You Win");
+        }
+    }
+    else {
+        lose();
+    }
+
 }
 
-function lose(first, second) {
+function win() {
+    //alert("You win");
+    flippedCards = [];
+    attempts = attempts + 2;
+    flipped = 0;
+}
 
-    alert("You lose");
+function lose() {
 
-    let front = first.querySelector('.front');
-    let none = first.querySelector('.none');
-    first.classList.toggle("turn");
+    //alert("You lose");
+
+    let front = flippedCards[0].querySelector('.front');
+    let none = flippedCards[0].querySelector('.none');
+    flippedCards[0].classList.toggle("turn");
     none.classList.remove('none');
     front.classList.add('none');
-    first.classList.remove('first');
 
-    front = second.querySelector('.front');
-    none = second.querySelector('.none');
-    second.classList.toggle("turn");
+    front = flippedCards[1].querySelector('.front');
+    none = flippedCards[1].querySelector('.none');
+    flippedCards[1].classList.toggle("turn");
     none.classList.remove('none');
     front.classList.add('none');
-    second.classList.remove('second');
 
-    flipped == 0;
+    flippedCards = [];
+    flipped = 0;
 }
