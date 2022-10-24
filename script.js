@@ -11,6 +11,7 @@ const FrontCards = [
 let flipped = 0;
 let back, none, value, attempts = 0;
 let flippedCards = [];
+let moves = 0;
 
 
 document.addEventListener("keypress", function (e) {
@@ -31,7 +32,7 @@ function start() {
     value = input.value;
     var cards = [];
 
-    if (value % 2 == 0 && value > 4 && value < 14) {
+    if (value % 2 == 0 && value >= 4 && value <= 14) {
 
         for (let j = 0; j < (value / 2); j++) {
             cards[j] = FrontCards[j];
@@ -71,6 +72,7 @@ function shurffle(cards) {
 function TurnCard(card) {
     back = card.querySelector('.back');
     none = card.querySelector('.none');
+    moves = moves + 1;
 
     if (flipped == 0)//se nenhuma carta estiver virada
     {
@@ -87,7 +89,7 @@ function TurnCard(card) {
         flippedCards.push(card);
 
 
-        setTimeout(compair, 1500);
+        compair();
 
     }
 }
@@ -98,13 +100,19 @@ function compair() {
     {
         win();
         if (attempts == value) {
-            alert("You Win");
+            setTimeout(gameover, 500);
         }
     }
     else {
-        lose();
+        setTimeout(lose, 1000);
     }
 
+}
+
+function gameover()
+{
+    alert(`You Win with ${moves} moves`);
+    document.location.reload(true);
 }
 
 function win() {

@@ -26,7 +26,10 @@ card
     align-items: center;
     margin-right: 34px;
 }
-
+.init{
+    width: 200px;
+    margin-bottom: 20px;
+}
 .back img
 {
     width: 100px;
@@ -102,5 +105,11 @@ overlay
 .none
 {
     display: none;
+}
+
+input{
+    margin-top: 20px;
+    width: 200px;
+    height: 32px;
 }
 
