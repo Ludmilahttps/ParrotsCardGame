@@ -31,7 +31,7 @@ function start() {
     value = input.value;
     var cards = [];
 
-    if (value % 2 == 0) {
+    if (value % 2 == 0 && value > 4 && value < 14) {
 
         for (let j = 0; j < (value / 2); j++) {
             cards[j] = FrontCards[j];
@@ -55,7 +55,7 @@ function start() {
         </card>`;
         }
     } else {
-        alert("Digite um número par");
+        alert("Digite um número par, maior que 4 e menor que 14");
         document.location.reload(true);
     }
 }
