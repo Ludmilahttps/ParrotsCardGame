@@ -39,6 +39,12 @@ card
     height: 100px;
 }
 
+.turn {
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+  }
+
 p
 {
     font-family: 'Roboto';
